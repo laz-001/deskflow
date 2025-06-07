@@ -32,11 +32,6 @@ if (BUILD_DOCS AND DOXYGEN_FOUND)
     flash_tutorial.md
   )
 
-  install(
-    DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
-    DESTINATION ${CMAKE_INSTALL_DOCDIR}
-    COMPONENT deskflow_docs)
-
   # Developer documentation with source code
   if (BUILD_DEV_DOCS)
     # Additional settings for developer docs
@@ -76,12 +71,6 @@ if (BUILD_DOCS AND DOXYGEN_FOUND)
       ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/io
       ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/base
       COMMENT "Generating developer documentation with source code")
-
-    # Install developer docs to separate directory
-    install(
-      DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/dev-docs/html"
-      DESTINATION ${CMAKE_INSTALL_DOCDIR}/dev
-      COMPONENT deskflow_dev_docs)
   endif()
 
 else()
