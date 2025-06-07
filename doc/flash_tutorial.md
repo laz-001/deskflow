@@ -2,9 +2,11 @@
 
 (code was compiled on a windows machine, though not tested agains a server.)
 
-## Use Case: Basic Mouse and Keyboard Sharing
+## Scenario
 
-You have two computers: a primary desktop running Deskflow server and a secondary laptop. The goal is to control the laptop using the desktop's mouse and keyboard seamlessly. We'll build a minimal C++ client that connects to the Deskflow server and handles basic input events.
+Imagine a setup with three computers. The first is your primary desktop, running the Deskflow server. The second is another computer (e.g., a laptop) running the standard Deskflow client. The third computer runs a custom operating system, and our goal is to build a new, minimal client from scratch for this custom OS, allowing it to be controlled seamlessly by the primary desktop.
+
+This tutorial guides you through the process of creating this minimal client.
 
 ## Step 0: Project Structure Setup
 
@@ -15,7 +17,7 @@ mkdir myclient
 cd myclient
 ```
 
-Create the following files:
+We will create the following files:
 - `main.cpp` - Main application entry point
 - `client.h` - Client class declaration
 - `client.cpp` - Client implementation

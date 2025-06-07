@@ -12,7 +12,7 @@ Deskflow acts as a software KVM (without video) that allows you to:
 
 Deskflow software consists of a **server** (primary computer) that shares its input devices and **clients** (secondary computers) that receive and execute the input commands over a TCP network connection.
 
-## Architecture Overview
+### Architecture Overview
 
 Deskflow is built with a modular, cross-platform architecture:
 
@@ -48,11 +48,11 @@ Deskflow is built with a modular, cross-platform architecture:
                                            └─────────────────┘
 ```
 
-## Configuration
+### Configuration
 Our [Configuration] page has example configurations
 
 
-## More info
+### More info
 
 For more info, see our [Wiki](https://github.com/deskflow/deskflow/wiki).
 

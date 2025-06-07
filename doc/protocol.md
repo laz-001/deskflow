@@ -1,4 +1,4 @@
-# Protocol Documentation
+# Protocol Overview
 
 - For a quick start on building a client, see the **[Flash Tutorial - Custom Client](@ref flash_tutorial.md)**.
 
@@ -186,10 +186,10 @@ When extending the protocol:
 
 ## Support and Resources
 
-- **Source Code**: [Deskflow GitHub Repository](https://github.com/deskflow/deskflow)
-- **Issue Tracker**: Report bugs and request features
-- **Community**: Join discussions and get help
-- **Reference Client**: Study the uSynergy micro client implementation
+- [Deskflow GitHub Repository](https://github.com/deskflow/deskflow)
+- [Report bugs and request features](https://github.com/deskflow/deskflow/issues)
+- [Join discussions and get help](https://github.com/deskflow/deskflow/discussions)
+- [Study the uSynergy micro client implementation](https://github.com/symless/synergy-micro-client)
 
 ---
 

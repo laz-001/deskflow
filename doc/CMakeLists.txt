@@ -22,6 +22,10 @@ if (BUILD_DOCS AND DOXYGEN_FOUND)
   get_filename_component(PROJECT_LOGO_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../deploy/linux/deskflow.png" ABSOLUTE)
   set(DOXYGEN_PROJECT_LOGO "${PROJECT_LOGO_PATH}")
   set(DOXYGEN_HTML_EXTRA_STYLESHEET "${CMAKE_CURRENT_SOURCE_DIR}/doxygen-custom.css")
+  #set(DOXYGEN_LAYOUT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout.xml")
+  #set(DOXYGEN_DISABLE_INDEX YES)
+  #set(DOXYGEN_GENERATE_TREEVIEW YES)
+  set(DOXYGEN_TOC_INCLUDE_HEADINGS 2)
 
   # Files used to make our documents
   # User facing documents will not include doxy comments in source code
@@ -31,7 +35,6 @@ if (BUILD_DOCS AND DOXYGEN_FOUND)
   target_sources(user-docs PRIVATE
     mainpage.md
     configuration.md
-    flash_tutorial.md
   )
 
   if(NOT ENV{CI})
@@ -65,6 +68,10 @@ if (BUILD_DOCS AND DOXYGEN_FOUND)
     set(DOXYGEN_PROJECT_BRIEF "Mouse and keyboard sharing utility")
     set(DOXYGEN_PROJECT_LOGO "${PROJECT_LOGO_PATH}")
     set(DOXYGEN_HTML_EXTRA_STYLESHEET "${CMAKE_CURRENT_SOURCE_DIR}/doxygen-custom.css")
+    #set(DOXYGEN_LAYOUT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout.xml")
+    #set(DOXYGEN_DISABLE_INDEX YES)
+    #set(DOXYGEN_GENERATE_TREEVIEW YES)
+    set(DOXYGEN_TOC_INCLUDE_HEADINGS 2)
     
     # Create protocol documentation page
     #set(DOXYGEN_USE_MDFILE_AS_MAINPAGE protocol.md)
