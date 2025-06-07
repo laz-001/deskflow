@@ -31,123 +31,34 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-docs:
+  build:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y doxygen graphviz cmake
-        
-    - name: Configure documentation build
-      run: |
-        # Create a minimal CMakeLists.txt that only builds documentation
-        mkdir -p docs-build
-        cat > docs-build/CMakeLists.txt << 'EOF'
-        cmake_minimum_required(VERSION 3.24)
-        project(DeskflowDocs)
-        add_subdirectory(../doc doc)
-        EOF
-        cd docs-build
-        cmake -B build -DBUILD_DOCS=ON -DBUILD_DEV_DOCS=ON
-        
-    - name: Build documentation
-      run: |
-        cd docs-build
-        cmake --build build --target user-docs
-        cmake --build build --target dev-docs
-        
-    - name: Prepare GitHub Pages content
-      run: |
-        mkdir -p pages
-        # Copy user docs to root
-        cp -r docs-build/build/doc/html/* pages/
-        # Copy developer docs to dev subdirectory
-        if [ -d "docs-build/build/doc/dev-docs/html" ]; then
-          mkdir -p pages/dev
-          cp -r docs-build/build/doc/dev-docs/html/* pages/dev/
-        fi
-        # Create index page that links to both
-        cat > pages/index.html << 'EOF'
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Deskflow Documentation</title>
-            <meta charset="utf-8">
-            <style>
-                body { font-family: Arial, sans-serif; margin: 40px; }
-                .container { max-width: 800px; margin: 0 auto; }
-                .docs-link { 
-                    display: block; 
-                    padding: 20px; 
-                    margin: 20px 0; 
-                    border: 2px solid #ddd; 
-                    border-radius: 8px; 
-                    text-decoration: none; 
-                    color: #333;
-                    transition: border-color 0.3s;
-                }
-                .docs-link:hover { border-color: #007acc; }
-                .docs-title { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
-                .docs-desc { color: #666; }
-                .header { text-align: center; margin-bottom: 40px; }
-                .logo { max-width: 200px; height: auto; }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="header">
-                    <h1>Deskflow Documentation</h1>
-                    <p>Choose the documentation that best fits your needs:</p>
-                </div>
-                
-                <a href="mainpage.html" class="docs-link">
-                    <div class="docs-title">📖 User Documentation</div>
-                    <div class="docs-desc">
-                        Configuration guides, setup instructions, and user-facing documentation.
-                        Perfect for end users and system administrators.
-                    </div>
-                </a>
-                
-                <a href="dev/protocol_8md.html" class="docs-link">
-                    <div class="docs-title">Developer Documentation</div>
-                    <div class="docs-desc">
-                        Complete protocol specification, API reference, and source code documentation.
-                        Essential for developers creating compatible clients and servers.
-                    </div>
-                </a>
-                
-                <div style="margin-top: 40px; text-align: center; color: #666;">
-                    <p>
-                        <a href="https://github.com/deskflow/deskflow">GitHub Repository</a> |
-                        <a href="https://github.com/deskflow/deskflow/wiki">Wiki</a> |
-                        <a href="https://github.com/deskflow/deskflow/issues">Issues</a>
-                    </p>
-                </div>
-            </div>
-        </body>
-        </html>
-        EOF
-        
-    - name: Upload Pages artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: pages
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  deploy-pages:
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz cmake
+
+      - name: Build Doxygen documentation
+        run: |
+          cmake -B docs-build -S doc -DBUILD_DOCS=ON -DBUILD_DEV_DOCS=ON
+          cmake --build docs-build --target user-docs
+          cmake --build docs-build --target dev-docs
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs-build/user-docs/html
+
+  deploy:
     if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/i8410-2') || github.event.inputs.force_deploy == 'true'
-    needs: build-docs
+    needs: build
     runs-on: ubuntu-latest
-    
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-      
     steps:
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
