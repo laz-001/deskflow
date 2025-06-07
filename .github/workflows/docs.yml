@@ -46,9 +46,6 @@ jobs:
           cmake --build docs-build --target user-docs
           cmake --build docs-build --target dev-docs
 
-      - name: Show build directory structure
-        run: ls -R docs-build
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
