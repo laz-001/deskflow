@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doxygenlayout version="2.0">
+  <!-- Simplified Doxygen layout -->
+  <!-- Navigation index tabs for HTML output -->
+  <navindex>
+    <tab type="mainpage" visible="yes" title="Home"/>
+    <tab type="pages" visible="yes" title="" intro=""/>
+    <tab type="topics" visible="yes" title="" intro=""/>
+    <tab type="modules" visible="yes" title="" intro=""/>
+    <tab type="namespaces" visible="yes" title="">
+      <tab type="namespacelist" visible="yes" title="" intro=""/>
+      <tab type="namespacemembers" visible="yes" title="" intro=""/>
+    </tab>
+    <tab type="concepts" visible="yes" title=""/>
+    <tab type="interfaces" visible="yes" title=""/>
+    <tab type="classes" visible="yes" title="">
+      <tab type="classlist" visible="yes" title="" intro=""/>
+      <tab type="classindex" visible="$ALPHABETICAL_INDEX" title=""/>
+      <tab type="hierarchy" visible="yes" title="" intro=""/>
+      <tab type="classmembers" visible="yes" title="" intro=""/>
+    </tab>
+    <tab type="structs" visible="yes" title=""/>
+    <tab type="exceptions" visible="yes" title=""/>
+    <tab type="files" visible="yes" title="">
+      <tab type="filelist" visible="yes" title="" intro=""/>
+      <tab type="globals" visible="yes" title="" intro=""/>
+    </tab>
+    <tab type="examples" visible="yes" title="" intro=""/>
+  </navindex>
+
+  <!-- Layout definition for a class page -->
+  <class>
+    <briefdescription visible="yes"/>
+    <includes visible="$SHOW_HEADERFILE"/>
+    <inheritancegraph visible="yes"/>
+    <memberdecl>
+      <publicmethods visible="yes" title=""/>
+      <protectedmethods visible="yes" title=""/>
+      <privatemethods visible="yes" title=""/>
+      <publicattributes visible="yes" title=""/>
+      <protectedattributes visible="yes" title=""/>
+      <privateattributes visible="yes" title=""/>
+    </memberdecl>
+    <detaileddescription visible="yes" title=""/>
+    <memberdef>
+      <constructors visible="yes" title=""/>
+      <functions visible="yes" title=""/>
+      <variables visible="yes" title=""/>
+    </memberdef>
+  </class>
+
+  <!-- Layout definition for a namespace page -->
+  <namespace>
+    <briefdescription visible="yes"/>
+    <memberdecl>
+      <classes visible="yes" title=""/>
+      <structs visible="yes" title=""/>
+      <enums visible="yes" title=""/>
+      <functions visible="yes" title=""/>
+      <variables visible="yes" title=""/>
+    </memberdecl>
+    <detaileddescription visible="yes" title=""/>
+    <memberdef>
+      <enums visible="yes" title=""/>
+      <functions visible="yes" title=""/>
+      <variables visible="yes" title=""/>
+    </memberdef>
+  </namespace>
+
+  <!-- Layout definition for a concept page -->
+  <concept>
+    <briefdescription visible="yes"/>
+    <includes visible="$SHOW_HEADERFILE"/>
+    <definition visible="yes" title=""/>
+    <detaileddescription visible="yes" title=""/>
+    <authorsection visible="yes"/>
+  </concept>
+
+  <!-- Layout definition for a file page -->
+  <file>
+    <briefdescription visible="yes"/>
+    <includes visible="$SHOW_INCLUDE_FILES"/>
+    <sourcelink visible="yes"/>
+    <memberdecl>
+      <classes visible="yes" title=""/>
+      <structs visible="yes" title=""/>
+      <enums visible="yes" title=""/>
+      <functions visible="yes" title=""/>
+      <variables visible="yes" title=""/>
+    </memberdecl>
+    <detaileddescription visible="yes" title=""/>
+    <memberdef>
+      <enums visible="yes" title=""/>
+      <functions visible="yes" title=""/>
+      <variables visible="yes" title=""/>
+    </memberdef>
+  </file>
+
+  <!-- Layout definition for a group page -->
+  <group>
+    <briefdescription visible="yes"/>
+    <memberdecl>
+      <files visible="yes" title=""/>
+      <classes visible="yes" title=""/>
+      <enums visible="yes" title=""/>
+      <functions visible="yes" title=""/>
+      <variables visible="yes" title=""/>
+    </memberdecl>
+    <detaileddescription visible="yes" title=""/>
+    <memberdef>
+      <enums visible="yes" title=""/>
+      <functions visible="yes" title=""/>
+      <variables visible="yes" title=""/>
+    </memberdef>
+  </group>
+
+  <!-- Layout definition for a C++20 module page -->
+  <module>
+    <briefdescription visible="yes"/>
+    <memberdecl>
+      <classes visible="yes" title=""/>
+      <enums visible="yes" title=""/>
+      <functions visible="yes" title=""/>
+      <variables visible="yes" title=""/>
+    </memberdecl>
+    <detaileddescription visible="yes" title=""/>
+  </module>
+
+  <!-- Layout definition for a directory page -->
+  <directory>
+    <briefdescription visible="yes"/>
+    <memberdecl>
+      <dirs visible="yes"/>
+      <files visible="yes"/>
+    </memberdecl>
+    <detaileddescription visible="yes" title=""/>
+  </directory>
+</doxygenlayout>
