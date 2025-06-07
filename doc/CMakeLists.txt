@@ -23,7 +23,7 @@ if (BUILD_DOCS AND DOXYGEN_FOUND)
 
   # Files used to make our documents
   # User facing documents will not include doxy comments in source code
-  doxygen_add_docs(user-docs ${CMAKE_SOURCE_DIR}/doc COMMENT "Generating user documentation" ALL)
+  doxygen_add_docs(user-docs ${CMAKE_CURRENT_SOURCE_DIR} COMMENT "Generating user documentation" ALL)
 
   # HACK Only these will show in your IDE
   target_sources(user-docs PRIVATE
