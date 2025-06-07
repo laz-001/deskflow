@@ -67,8 +67,10 @@ jobs:
         # Copy user docs to root
         cp -r docs-build/build/doc/html/* pages/
         # Copy developer docs to dev subdirectory
-        mkdir -p pages/dev
-        cp -r docs-build/build/doc/dev-docs/html/* pages/dev/
+        if [ -d "docs-build/build/doc/dev-docs/html" ]; then
+          mkdir -p pages/dev
+          cp -r docs-build/build/doc/dev-docs/html/* pages/dev/
+        fi
         # Create index page that links to both
         cat > pages/index.html << 'EOF'
         <!DOCTYPE html>
