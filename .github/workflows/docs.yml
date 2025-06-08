@@ -2,13 +2,13 @@ name: Documentation
 
 on:
   push:
-    branches: [ main, master, i8410-2 ]
+    branches: [ main, master, i8410-* ]
     paths:
       - 'src/lib/deskflow/**'
       - 'doc/**'
       - '.github/workflows/docs.yml'
   pull_request:
-    branches: [ main, master, i8410-2 ]
+    branches: [ main, master, i8410-* ]
     paths:
       - 'src/lib/deskflow/**'
       - 'doc/**'
@@ -52,7 +52,7 @@ jobs:
           path: docs-build/html
 
   deploy:
-    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/i8410-2') || github.event.inputs.force_deploy == 'true'
+    if: startsWith(github.ref, 'refs/heads/main') || startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/heads/i8410-') || github.event.inputs.force_deploy == 'true'
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -62,3 +62,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+  

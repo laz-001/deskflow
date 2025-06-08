@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 3.16)
-project(DeskFlowDocs)
-
 # SPDX-FileCopyrightText: 2019 - 2024 Chris Rizzitello <sithlord48@gmail.com>
 # SPDX-License-Identifier: MIT
 
+# Those are needed to build the docs standalone, independent of the main project
+cmake_minimum_required(VERSION 3.16)
+project(DeskFlowDocs)
 include(GNUInstallDirs)
+# end standalone
 
 find_package(Doxygen QUIET)
 option(BUILD_DOCS "Build and install documents" ${DOXYGEN_FOUND})
@@ -12,7 +13,6 @@ option(BUILD_DEV_DOCS "Build developer documentation with source code" OFF)
 
 if (BUILD_DOCS AND DOXYGEN_FOUND)
 
-  # Common Doxygen settings
   set(DOXYGEN_EXTRACT_ALL YES)
   set(DOXYGEN_STRIP_FROM_PATH ${CMAKE_SOURCE_DIR})
   set(DOXYGEN_USE_MDFILE_AS_MAINPAGE mainpage.md)
@@ -22,9 +22,6 @@ if (BUILD_DOCS AND DOXYGEN_FOUND)
   get_filename_component(PROJECT_LOGO_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../deploy/linux/deskflow.png" ABSOLUTE)
   set(DOXYGEN_PROJECT_LOGO "${PROJECT_LOGO_PATH}")
   set(DOXYGEN_HTML_EXTRA_STYLESHEET "${CMAKE_CURRENT_SOURCE_DIR}/doxygen-custom.css")
-  #set(DOXYGEN_LAYOUT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout.xml")
-  #set(DOXYGEN_DISABLE_INDEX YES)
-  #set(DOXYGEN_GENERATE_TREEVIEW YES)
   set(DOXYGEN_TOC_INCLUDE_HEADINGS 2)
 
   # Files used to make our documents
@@ -37,13 +34,11 @@ if (BUILD_DOCS AND DOXYGEN_FOUND)
     configuration.md
   )
 
-  if(NOT ENV{CI})
-    install(
-      DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
-      DESTINATION ${CMAKE_INSTALL_DOCDIR}
-      COMPONENT deskflow_docs)
-  endif()
-
+  install(
+    DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
+    DESTINATION ${CMAKE_INSTALL_DOCDIR}
+    COMPONENT deskflow_docs)
+ 
   # Developer documentation with source code
   if (BUILD_DEV_DOCS)
     # Additional settings for developer docs
@@ -63,23 +58,9 @@ if (BUILD_DOCS AND DOXYGEN_FOUND)
     set(DOXYGEN_GROUP_GRAPHS YES)
     set(DOXYGEN_DIRECTORY_GRAPH YES)
     
-    # Keep the project name and logo consistent for developer docs
-    set(DOXYGEN_PROJECT_NAME "Deskflow")
-    set(DOXYGEN_PROJECT_BRIEF "Mouse and keyboard sharing utility")
-    set(DOXYGEN_PROJECT_LOGO "${PROJECT_LOGO_PATH}")
-    set(DOXYGEN_HTML_EXTRA_STYLESHEET "${CMAKE_CURRENT_SOURCE_DIR}/doxygen-custom.css")
-    #set(DOXYGEN_LAYOUT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout.xml")
-    #set(DOXYGEN_DISABLE_INDEX YES)
-    #set(DOXYGEN_GENERATE_TREEVIEW YES)
-    set(DOXYGEN_TOC_INCLUDE_HEADINGS 2)
-    
-    # Create protocol documentation page
-    #set(DOXYGEN_USE_MDFILE_AS_MAINPAGE protocol.md)
-    
     # Include source code directories
     doxygen_add_docs(dev-docs 
       ${CMAKE_CURRENT_SOURCE_DIR}
-      ${CMAKE_CURRENT_SOURCE_DIR}/flash_tutorial.md
       ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/deskflow
       ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/client
       ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/server
