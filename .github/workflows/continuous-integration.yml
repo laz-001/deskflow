@@ -6,7 +6,7 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [master]
+    branches: [master, i8410-via-pr8663]
     tags:
       - 'v*'
   pull_request:
@@ -305,7 +305,7 @@ jobs:
           job: ${{ matrix.target.name }}
 
       - name: Update Development Documentation
-        if: matrix.target.like == 'arch' && github.ref == 'refs/heads/master'
+        if: matrix.target.like == 'arch' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/i8410-via-pr8663')
         uses: JamesIves/github-pages-deploy-action@v4.7.3
         with:
           branch: gh-pages
@@ -401,7 +401,7 @@ jobs:
 
   release:
     needs: ci-passed
-    if: (github.ref == 'refs/heads/master') || (contains(github.ref, '/tags/v'))
+    if: (github.ref == 'refs/heads/master') || (contains(github.ref, '/tags/v')) || (github.ref == 'refs/heads/i8410-via-pr8663')
     runs-on: ubuntu-latest
 
     steps:
@@ -424,7 +424,7 @@ jobs:
           sha256sum deskflow-* >> sums.txt
 
       - name: Deploy continuous
-        if: (github.ref == 'refs/heads/master') && !(contains(github.ref, '/tags/v'))
+        if: ((github.ref == 'refs/heads/master') || (github.ref == 'refs/heads/i8410-via-pr8663')) && !(contains(github.ref, '/tags/v'))
         uses: crowbarmaster/GH-Automatic-Releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
