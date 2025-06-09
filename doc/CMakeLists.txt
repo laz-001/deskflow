@@ -3,7 +3,7 @@
 
 find_package(Doxygen QUIET)
 option(BUILD_USER_DOCS "Build and install user documentation" ${DOXYGEN_FOUND})
-option(BUILD_DEV_DOCS "Build and install developer documentation" OFF)
+option(BUILD_DEV_DOCS "Build and install developer documentation" ON)
 
 if (DOXYGEN_FOUND)
   if (BUILD_USER_DOCS)
