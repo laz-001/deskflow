@@ -50,3 +50,7 @@ BraceWrapping:
 
 # no single line functions
 AllowShortFunctionsOnASingleLine: None
+
+# Prevent clang-format from breaking Doxygen/documentation comments.
+# See: https://clang.llvm.org/docs/ClangFormatStyleOptions.html#commentpragmas
+CommentPragmas: '[@\\]'
